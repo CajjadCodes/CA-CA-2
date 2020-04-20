@@ -1,4 +1,4 @@
-module Mux4to1_5bit (inp0, inp1, inp2, inp3, sel, out);
+module Mux4to1_32bit (inp0, inp1, inp2, inp3, sel, out);
 input [31:0] inp0;
 input [31:0] inp1;
 input [31:0] inp2;
