@@ -1,5 +1,5 @@
-module OpcDcd(Opc,RT,addi,andi,lw,sw,j,jal,jr,beq,bne);
-input [5:0]Opc;
+module OpcDcd(opc,RT,addi,andi,lw,sw,j,jal,jr,beq,bne);
+input [5:0]opc;
 output reg RT;
 output reg addi;
 output reg andi;
@@ -10,9 +10,9 @@ output reg jal;
 output reg jr;
 output reg beq;
 output reg bne;
-always@(Opc)begin
+always@(opc)begin
 	{RT,addi,andi,lw,sw,j,jal,jr,beq,bne}=10'b0;
-	case(Opc)
+	case(opc)
 		6'b000000: RT=1;
 		6'b001000: addi=1;
 		6'b001100: andi=1;
