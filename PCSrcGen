@@ -1,0 +1,12 @@
+module PCSrcGen(j,jal,jr,beq,bne,Zero,PCSrc);
+input j;
+input jal;
+input jr;
+input beq;
+input bne;
+input Zero;
+output [1:0]PCSrc;
+assign MSB=j|jal|jr;
+assign LSB=jr|(beq&Zero)|(bne&~Zero);
+assign PCSrc={MSB,LSB};
+endmodule
