@@ -16,7 +16,7 @@ module TBmips();
 		#300
 		rst = 0;
 	
-		#400000
+		#1000000
 		$stop;
 	end
 
