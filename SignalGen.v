@@ -18,15 +18,33 @@ output reg MemToReg;
 output reg [1:0]ALUOp;
 output reg WDInp;
 
-	always@(RT or addi or andi or lw or sw or j or jal or jr or beq or bne)begin
-		if(RT) {RegDst,RegWrite,ALUSrc,MemRead,MemWrite,MemToReg,ALUOp,WDInp}=10'b0110000100;
-		else if(addi) {RegDst,RegWrite,ALUSrc,MemRead,MemWrite,MemToReg,ALUOp,WDInp}=10'b0011000000;
-		else if(andi) {RegDst,RegWrite,ALUSrc,MemRead,MemWrite,MemToReg,ALUOp,WDInp}=10'b0011000110;
-		else if(lw) {RegDst,RegWrite,ALUSrc,MemRead,MemWrite,MemToReg,ALUOp,WDInp}=10'b0011101000;
-		else if(sw) {RegWrite,ALUSrc,MemRead,MemWrite,ALUOp}=6'b010100;
-		else if(j) {RegWrite,MemRead,MemWrite}=3'b000;
-		else if(jal) {RegDst,RegWrite,MemRead,MemWrite,WDInp}=6'b101001;
-		else if(jr) {RegWrite,MemRead,MemWrite}=3'b000;
-		else if(beq|bne) {RegWrite,ALUSrc,MemRead,MemWrite,ALUOp}=6'b000001;
+	always@(RT or addi or andi or lw or sw or j or jal or jr or beq or bne) begin
+		ALUOp = 2'b00; RegDst = 2'b00;
+		{WDInp, RegWrite, ALUSrc, MemRead, MemWrite, MemToReg} = 6'b0;
+		if (RT) begin
+			RegDst = 2'b01; RegWrite = 1'b1;
+			ALUOp = 2'b10;
+		end
+		else if (addi) begin
+			{RegWrite, ALUSrc} = 2'b11;
+		end
+		else if (andi) begin
+			{RegWrite, ALUSrc} = 2'b11;
+			ALUOp = 2'b11;
+		end
+		else if (lw) begin
+			{RegWrite, ALUSrc, MemRead, MemToReg} = 4'b1111;
+		end
+		else if (sw) begin
+			{ALUSrc, MemWrite} = 2'b11;
+		end
+		else if (beq | bne) begin
+			ALUOp = 2'b01;
+		end
+		else if (jal) begin
+			RegDst = 2'b10;
+			{RegWrite, WDInp} = 2'b11;
+		end
+		//No change for "j" and "jr"
 	end
 endmodule
