@@ -126,7 +126,7 @@ output zero;
 		.inp0(PC_upper),
 		.inp1(PCSrcMuxInp1),
 		.inp2({PCout[31:28], instruction[25:0], 2'b00}),
-		.inp3(ReadData2),
+		.inp3(ReadData1),
 		.sel(PCSrc),
 		.out(PCinp)
 		);
