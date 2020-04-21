@@ -18,8 +18,8 @@ input rst;
 		.ALUOperation(ALUOperation),
 		.MemRead(MemRead),
 		.MemWrite(MemWrite),
-		.MemtoReg(MemToReg),
-		.PCSRc(PCSrc),
+		.MemToReg(MemToReg),
+		.PCSrc(PCSrc),
 		.opc(opc),
 		.func(func),
 		.zero(zero)
