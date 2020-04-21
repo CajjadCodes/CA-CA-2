@@ -1,6 +1,6 @@
-module Controller(opc,func,zero,RegDst,RegWrite,ALUSrc,MemRead,MemWrite,MemToReg,WDInp,PCSrc);
-input opc;
-input func;
+module Controller(opc,func,zero,RegDst,RegWrite,ALUSrc,MemRead,MemWrite,MemToReg,WDInp,PCSrc,ALUOperation);
+input [5:0]opc;
+input [5:0]func;
 input zero;
 output [1:0]RegDst;
 output RegWrite;
@@ -10,6 +10,8 @@ output MemWrite;
 output MemToReg;
 output WDInp;
 output [1:0]PCSrc;
+output [2:0]ALUOperation;
+	
 	wire RT,addi,andi,lw,sw,j,jal,jr,beq,bne;
 	OpcDcd OD(
 		.opc(opc),
@@ -25,7 +27,8 @@ output [1:0]PCSrc;
 		.bne(bne)
 		);
 	wire [1:0]ALUOp;
-	SignalGen SG(.RT(RT),
+	SignalGen SG(
+		.RT(RT),
 		.addi(addi),
 		.andi(andi),
 		.lw(lw),
@@ -44,8 +47,8 @@ output [1:0]PCSrc;
 		.ALUOp(ALUOp),
 		.WDInp(WDInp)
 		);
-	wire [2:0]ALUOperation;
-	ALUControl AC(.ALUOp(ALUOp),
+	ALUControl AC(
+		.ALUOp(ALUOp),
 		.func(func),
 		.ALUOperation(ALUOperation)
 		);
