@@ -16,6 +16,6 @@ output [31:0] ReadData;
 	end
 
 	initial begin 
-		$readmemb("Mem.data", DataMem, 1000);
+		$readmemb("Mem.data", DataMem, 250);
 	end
 endmodule 
