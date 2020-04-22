@@ -11,8 +11,10 @@ output [31:0] ReadData;
 	assign ReadData = MemRead? DataMem[address[31:2]]: 32'bz;
 	
 	always @(posedge clk) begin
-		if (MemWrite) 
+		if (MemWrite) begin
 			DataMem[address[31:2]] <=  WriteData;
+			$display("DataMemory write => Stored data %d in address %d ", WriteData, address);	
+		end
 	end
 
 	initial begin 
