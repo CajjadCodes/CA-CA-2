@@ -3,10 +3,10 @@ input clk;
 input MemRead;
 input MemWrite;
 input [31:0] address;
-input [31:0] WriteData;
-output [31:0] ReadData;
+input signed [31:0] WriteData;
+output signed [31:0] ReadData;
 
-	reg [31:0] DataMem [0:8192]; //64 KB - 8 KW
+	reg signed [31:0] DataMem [0:8192]; //64 KB - 8 KW
 
 	assign ReadData = MemRead? DataMem[address[31:2]]: 32'bz;
 	
